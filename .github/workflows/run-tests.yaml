@@ -27,5 +27,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements-devel.txt ]; then pip install -r requirements-devel.txt; fi
     - name: Test with manage.py
+      env:
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       run: |
         python manage.py test
