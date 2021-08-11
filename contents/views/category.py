@@ -1,5 +1,4 @@
 from djrest_wrapper.interfaces import BaseViewSet
-from djrest_wrapper.decorators import serializer_validation, create_model, list_model, retrieve_model, update_model, delete_model
 from ..services import CategoryService
 from .. import serializers as ser
 from ..models import Category
@@ -8,24 +7,25 @@ from djrest_wrapper import permissions as perm
 
 class CategoryViewSet(BaseViewSet):
     service = CategoryService(Category)
-    page_result_key = 'Category'
+    page_result_key = 'Categories'
     serializer_action_classes = {
         'create': {
-            'req': ser.CataogryCreateReqSerilizer,
-            'res': ser.CataogryCreateResSerilizer,
+            'req': ser.CategoryCreateReqSerializer,
+            'res': ser.CategoryCreateResSerilizer,
         },
         'list': {
-            'res': ser.CataogryListResSerilizer,
+            'res': ser.CategoryListResSerializer,
         },
         'retrieve': {
-            'res': ser.CataogryRetrieveResSerilizer,
+            'res': ser.CategoryRetrieveResSerializer,
         },
         'update': {
-            'req': ser.CataogryUpdateReqSerilizer,
-            'res': ser.CataogryUpdateResSerilizer,
+            'req': ser.CategoryUpdateReqSerializer,
+            'res': ser.CategoryUpdateResSerializer,
         }
     }
     permission_action_classes = {
+        'create': [perm.IsAdminUserPerm],
         'update': [perm.IsAdminUserPerm],
-        'destroy': [perm.IsAdminUserPerm],
+        'destroy': [perm.IsAdminUserPerm]
     }
