@@ -1,4 +1,3 @@
-from re import MULTILINE
 from rest_framework import serializers
 from contents.models import Category
 
