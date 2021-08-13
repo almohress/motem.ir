@@ -23,10 +23,9 @@ class MultimediaViewSet(BaseViewSet):
         }
     }
     def create(self, request, *args, **kwargs):
-        file_uploaded = request.FILES.get('file_uploaded')
+        file_uploaded = request.FILES.get('file')
         content_type = file_uploaded.content_type
         request_json = request.data
         self.service.create_model(file=file_uploaded,fields=request_json)
-
         response = "POST API and you have uploaded a {} file".format(content_type)
         return Response(response)
