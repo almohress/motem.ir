@@ -5,12 +5,12 @@ from contents.models import Multimedia
 class MultimediaCreateReqSerializer(serializers.ModelSerializer):
 
     class Meta:
-        Model = Multimedia
-        fields = {'file', 'last_modified', 'is_video'}
+        model = Multimedia
+        fields = ['file', 'last_modified', 'is_video']
 
 
 class MultimediaCreateResSerializer(serializers.ModelSerializer):
 
     class Meta:
-        Model = Multimedia
-        fields = {'id', 'file', 'last_modified', 'is_video'}
+        model = Multimedia
+        fields = ['id', 'file', 'last_modified', 'is_video']
