@@ -4,10 +4,8 @@ from contents import serializers as ser
 
 
 class ContentRetrieveResSerilizer(serializers.Serializer):
-    catagory = ser.CataogryRetrieveResSerilizer()
-    files = ser.MultimediaRetrieveResSerilizer()
 
     class Meta:
-        Model = Content
-        fields = {'id', 'title', 'body', 'last_modified',
-                  'is_published', 'catagory', 'files'}
+        model = Content
+        fields = ['id', 'title', 'body', 'last_modified',
+                  'is_published', 'catagory', 'files']
