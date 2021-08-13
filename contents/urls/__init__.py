@@ -1,5 +1,6 @@
 
 from .category import urlpatterns as category_urls
+from .multimedia import urlpatterns as multimedia_urls
 
 
-urlpatterns = category_urls
+urlpatterns = category_urls+multimedia_urls
