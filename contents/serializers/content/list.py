@@ -3,7 +3,7 @@ from contents.models import Content
 from contents import serializers as ser
 
 
-class ContentListResSerilizer(serializers.Serializer):
+class ContentListResSerilizer(serializers.ModelSerializer):
 
     class Meta:
         model = Content

@@ -3,14 +3,14 @@ from contents.models import Content
 from contents import serializers as ser
 
 
-class ContentUpdateReqSerilizer(serializers.Serializer):
+class ContentUpdateReqSerilizer(serializers.ModelSerializer):
     class Meta:
         model = Content
         fields = ['title', 'body', 'last_modified',
                   'is_published', 'catagory', 'files']
 
 
-class ContentUpdateResSerilizer(serializers.Serializer):
+class ContentUpdateResSerilizer(serializers.ModelSerializer):
 
     class Meta:
         model = Content

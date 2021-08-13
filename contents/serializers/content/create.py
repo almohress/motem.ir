@@ -3,7 +3,7 @@ from contents.models import Content
 from contents import serializers as ser
 
 
-class ContentCreateReqSerilizer(serializers.Serializer):
+class ContentCreateReqSerilizer(serializers.ModelSerializer):
 
     class Meta:
         model = Content
@@ -11,7 +11,7 @@ class ContentCreateReqSerilizer(serializers.Serializer):
                   'is_published', 'catagory', 'files']
 
 
-class ContentCreateResSerilizer(serializers.Serializer):
+class ContentCreateResSerilizer(serializers.ModelSerializer):
 
     class Meta:
         model = Content
