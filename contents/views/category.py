@@ -1,13 +1,14 @@
-from djrest_wrapper.interfaces import BaseViewSet
+from djrest_wrapper.decorators import serializer_validation
+from rest_framework.viewsets import ModelViewSet
 from ..services import CategoryService
 from .. import serializers as ser
 from ..models import Category
 from djrest_wrapper import permissions as perm
 
 
-class CategoryViewSet(BaseViewSet):
+class CategoryViewSet(ModelViewSet):
     service = CategoryService(Category)
-    page_result_key = 'Categories'
+    page_result_key = 'categories'
     serializer_action_classes = {
         'create': {
             'req': ser.CategoryCreateReqSerializer,
@@ -29,3 +30,11 @@ class CategoryViewSet(BaseViewSet):
         'update': [perm.IsAdminUserPerm],
         'destroy': [perm.IsAdminUserPerm]
     }
+
+    @serializer_validation
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @serializer_validation
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
