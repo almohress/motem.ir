@@ -6,4 +6,4 @@ class CategoryListResSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ['id', 'name', 'title', 'description', 'files']
+        fields = ['id', 'name', 'title', 'files']

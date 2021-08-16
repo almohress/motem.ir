@@ -6,7 +6,7 @@ class CategoryCreateReqSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ['name', 'title', 'description']
+        fields = ['name', 'title', 'description', 'files']
 
 
 class CategoryCreateResSerilizer(serializers.ModelSerializer):
