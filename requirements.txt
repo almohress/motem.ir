@@ -8,7 +8,7 @@ Django==3.2.6
 django-environ==0.4.5
 django-storages==1.11.1
 djangorestframework==3.12.4
-djrest-wrapper==0.1.4
+djrest-wrapper==0.1.5
 pycodestyle==2.7.0
 pycryptodomex==3.10.1
 PyJWT==2.1.0
