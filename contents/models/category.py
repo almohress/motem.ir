@@ -7,4 +7,4 @@ class Category(BaseModel):
     name = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     description = models.TextField()
-    files = models.ManyToManyField(Multimedia)
+    files = models.ManyToManyField(Multimedia, blank=True)
