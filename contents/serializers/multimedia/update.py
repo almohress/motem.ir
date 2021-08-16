@@ -6,7 +6,7 @@ class MultimediaUpdateReqSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Multimedia
-        fields = ['file', 'last_modified', 'is_video']
+        fields = ['file', 'last_modified']
 
 
 class MultimediaUpdateResSerializer(serializers.ModelSerializer):
