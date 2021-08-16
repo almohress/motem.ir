@@ -3,7 +3,7 @@ import os
 import magic
 from django.db import models
 from djrest_wrapper.interfaces import BaseModel
-
+from djrest_wrapper.exceptions import ValidationErrorExp
 
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
@@ -17,6 +17,13 @@ class Multimedia(BaseModel):
     is_video = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        if magic.Magic(mime=True).from_buffer(self.file.file.file.read()).split('/')[0].lower() == 'video':
+        mime = magic.Magic(mime=True).from_buffer(
+            self.file.file.file.read()).split('/')[0].lower()
+        if mime == 'video':
             self.is_video = True
-        super().save(args, kwargs)
+            super().save(args, kwargs)
+        elif mime == 'image':
+            self.is_video = True
+            super().save(args, kwargs)
+        else:
+            raise ValidationErrorExp('uploaded multimedia should be video or image')
