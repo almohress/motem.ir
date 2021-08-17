@@ -23,7 +23,7 @@ class Multimedia(BaseModel):
             self.is_video = True
             super().save(args, kwargs)
         elif mime == 'image':
-            self.is_video = True
+            self.is_video = False
             super().save(args, kwargs)
         else:
             raise ValidationErrorExp('uploaded multimedia should be video or image')
