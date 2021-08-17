@@ -8,4 +8,4 @@ class ContentRetrieveResSerilizer(serializers.ModelSerializer):
     class Meta:
         model = Content
         fields = ['id', 'title', 'body', 'last_modified',
-                  'is_published', 'catagory', 'files']
+                  'is_published', 'category', 'files']
