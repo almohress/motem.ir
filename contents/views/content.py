@@ -5,7 +5,7 @@ from ..models import Content
 
 
 class ContentViewSet(BaseViewSet):
-    service = ContentService(Content)
+    queryset=Content.objects.all()
     page_result_key='contents'
     serializer_action_classes = {
         'create': {
