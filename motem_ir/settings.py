@@ -1,5 +1,7 @@
 from pathlib import Path
 from os import getenv
+from datetime import timedelta
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = getenv('SECRET_KEY')
@@ -18,6 +20,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'storages',
     'contents.apps.ContentsConfig',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +67,16 @@ if DEBUG:
     }
 else:
     pass
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ]
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {

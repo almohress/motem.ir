@@ -4,6 +4,7 @@ from django.urls import path, include
 
 urls = [
     path('',include('contents.urls')),
+    path('', include('users.urls')),
 ]
 
 if DEBUG:
