@@ -8,7 +8,7 @@ urls = [
 ]
 
 if DEBUG:
-    from djrest_wrapper.permissions import AllowAnyPerm
+    from rest_framework.permissions import AllowAny
     from django.conf.urls import url
     from drf_yasg.views import get_schema_view
     from drf_yasg import openapi
@@ -22,7 +22,7 @@ if DEBUG:
             license=openapi.License(name="BSD License"),
         ),
         public=True,
-        permission_classes=[AllowAnyPerm],
+        permission_classes=[AllowAny],
     )
 
     urlpatterns = [
