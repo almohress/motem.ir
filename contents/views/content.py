@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAdminUser
 from djrest_wrapper.interfaces import BaseViewSet
 from ..services import ContentService
 from .. import serializers as ser
@@ -22,4 +23,10 @@ class ContentViewSet(BaseViewSet):
             'req': ser.ContentUpdateReqSerilizer,
             'res': ser.ContentUpdateResSerilizer,
         }
+    }
+    permission_action_classes = {
+        'create': [IsAdminUser],
+        'update': [IsAdminUser],
+        'partial_update': [IsAdminUser],
+        'destroy': [IsAdminUser],
     }
