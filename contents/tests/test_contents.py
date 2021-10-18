@@ -48,6 +48,38 @@ class ContentTestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(response.json().get('contents'))
 
+    def test_list_admin_published_contents(self):
+        for i in range(10):
+            Content.objects.create(
+                body=f'test {i}', title=f'test {i}', is_published=bool(i % 2), category=self.category)
+        token = self.login('testuser', 'testuserpass')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        url = reverse('content-list')
+        data = {
+            'is_published': True,
+        }
+        response = self.client.get(url, data)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.json().get('contents'))
+        for content in response.json().get('contents'):
+            self.assertEqual(content.get('is_published'), True)
+
+    def test_list_admin_not_published_contents(self):
+        for i in range(10):
+            Content.objects.create(
+                body=f'test {i}', title=f'test {i}', is_published=bool(i % 2), category=self.category)
+        token = self.login('testuser', 'testuserpass')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        url = reverse('content-list')
+        data = {
+            'is_published': False,
+        }
+        response = self.client.get(url, data)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.json().get('contents'))
+        for content in response.json().get('contents'):
+            self.assertEqual(content.get('is_published'), False)
+
     def test_list_published_contents(self):
         for i in range(10):
             Content.objects.create(
