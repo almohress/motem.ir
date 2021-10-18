@@ -1,4 +1,8 @@
-from .create import MultimediaCreateReqSerializer,MultimediaCreateResSerializer
-from .list import MultimediaListResSerializer
-from .retrieve import MultimediaRetrieveResSerializer
-from .update import MultimediaUpdateReqSerializer,MultimediaUpdateResSerializer 
+from rest_framework import serializers
+from ...models import Multimedia
+
+
+class MultimediaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Multimedia
+        fields = ['id', 'file']

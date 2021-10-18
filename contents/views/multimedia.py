@@ -9,18 +9,18 @@ class MultimediaViewSet(BaseViewSet):
     page_result_key = 'multimedia'
     serializer_action_classes = {
         'create': {
-            'req': ser.MultimediaCreateReqSerializer,
-            'res': ser.MultimediaCreateResSerializer,
+            'req': ser.MultimediaSerializer,
+            'res': ser.MultimediaSerializer,
         },
         'list': {
-            'res': ser.MultimediaListResSerializer,
+            'res': ser.MultimediaSerializer,
         },
         'retrieve': {
-            'res': ser.MultimediaRetrieveResSerializer,
+            'res': ser.MultimediaSerializer,
         },
         'update': {
-            'req': ser.MultimediaUpdateReqSerializer,
-            'res': ser.MultimediaUpdateResSerializer,
+            'req': ser.MultimediaSerializer,
+            'res': ser.MultimediaSerializer,
         }
     }
     permission_action_classes = {
