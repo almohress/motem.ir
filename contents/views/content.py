@@ -9,22 +9,22 @@ class ContentViewSet(BaseViewSet):
     page_result_key = 'contents'
     serializer_action_classes = {
         'create': {
-            'req': ser.ContentSerilizer,
-            'res': ser.ContentSerilizer,
+            'req': ser.ContentSerializer,
+            'res': ser.ContentSerializer,
         },
         'list': {
-            'res': ser.ContentListSerilizer,
+            'res': ser.ContentListSerializer,
         },
         'retrieve': {
-            'res': ser.ContentSerilizer,
+            'res': ser.ContentSerializer,
         },
         'update': {
-            'req': ser.ContentSerilizer,
-            'res': ser.ContentSerilizer,
+            'req': ser.ContentSerializer,
+            'res': ser.ContentSerializer,
         },
         'partial_update': {
-            'req': ser.ContentSerilizer,
-            'res': ser.ContentSerilizer,
+            'req': ser.ContentSerializer,
+            'res': ser.ContentSerializer,
         }
     }
     permission_action_classes = {

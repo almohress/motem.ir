@@ -2,14 +2,14 @@ from rest_framework import serializers
 from ...models import Content
 
 
-class ContentSerilizer(serializers.ModelSerializer):
+class ContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Content
-        fields = ['id', 'title', 'body',
+        fields = ['id', 'title', 'body', 'last_modified'
                   'is_published', 'category', 'files']
 
 
-class ContentListSerilizer(serializers.ModelSerializer):
+class ContentListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Content
