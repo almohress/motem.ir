@@ -1,5 +1,8 @@
+import requests
 from rest_framework.test import APITestCase
 from django.urls import reverse
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.files import File
 from django.contrib.auth.models import User
 from ..models import Content, Category
 
@@ -23,7 +26,30 @@ class ContentTestCase(APITestCase):
         response = self.client.post(url, data, format='json')
         return response.json().get('access', None)
 
+    def upload_file(self):
+        url = 'https://filesamples.com/samples/image/jpeg/sample_640%C3%97426.jpeg'
+        filename = 'multimedia/testjpeg.jpeg'
+        with requests.get(url=url, stream=True) as r:
+            r.raise_for_status()
+
+            with open(filename, mode='wb') as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        url = reverse('multimedia-list')
+        token = self.login('testuser', 'testuserpass')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        with open(filename, mode='rb') as handle:
+            file = File(handle)
+            upload = SimpleUploadedFile(
+                filename, file.read(), content_type='multipart/form-data')
+            data = {
+                'file': upload
+            }
+            response = self.client.post(url, data, format='multipart')
+        return response.json()
+
     def test_create_content(self):
+        files = [self.upload_file() for _ in range(3)]
         token = self.login('testuser', 'testuserpass')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
         url = reverse('content-list')
@@ -32,10 +58,12 @@ class ContentTestCase(APITestCase):
             'body': 'test title',
             'is_published': False,
             'category': str(self.category.id),
+            'files': [file.get('multimedia').get('id') for file in files]
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, 201)
         self.assertIsNotNone(response.json().get('content'))
+        self.assertIsNotNone(response.json().get('content').get('files'))
 
     def test_list_all_contents(self):
         for i in range(10):
