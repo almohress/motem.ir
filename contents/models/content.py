@@ -9,7 +9,7 @@ class Content(BaseModel):
     is_published = models.BooleanField(default=False)
     category = models.ForeignKey(
         'contents.Category', related_name='category', on_delete=models.CASCADE)
-    files = models.ManyToManyField('contents.Multimedia')
+    files = models.ManyToManyField('contents.Multimedia', blank=True)
 
     class Meta:
         verbose_name = 'content'
