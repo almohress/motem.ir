@@ -17,8 +17,8 @@ class ContentTestCase(APITestCase):
         """
         url = reverse('token_obtain_pair')
         data = {
-            'username': 'testuser',
-            'password': 'testuserpass'
+            'username': username,
+            'password': password
         }
         response = self.client.post(url, data, format='json')
         return response.json().get('access', None)
