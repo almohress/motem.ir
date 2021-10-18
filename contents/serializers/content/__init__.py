@@ -5,7 +5,7 @@ from ...models import Content
 class ContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Content
-        fields = ['id', 'title', 'body', 'last_modified'
+        fields = ['id', 'title', 'body', 'last_modified',
                   'is_published', 'category', 'files']
 
 
