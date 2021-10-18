@@ -1,4 +1,15 @@
-from .create import CategoryCreateReqSerializer,CategoryCreateResSerilizer
-from .list import CategoryListResSerializer
-from .retrieve import CategoryRetrieveResSerializer
-from .update import CategoryUpdateReqSerializer,CategoryUpdateResSerializer
+from rest_framework import serializers
+from ...models import Category
+
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'title', 'description', 'files']
+
+class CategoryListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'title', 'files']

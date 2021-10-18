@@ -9,18 +9,18 @@ class CategoryViewSet(BaseViewSet):
     page_result_key = 'categories'
     serializer_action_classes = {
         'create': {
-            'req': ser.CategoryCreateReqSerializer,
-            'res': ser.CategoryCreateResSerilizer,
+            'req': ser.CategorySerializer,
+            'res': ser.CategorySerializer,
         },
         'list': {
-            'res': ser.CategoryListResSerializer,
+            'res': ser.CategoryListSerializer,
         },
         'retrieve': {
-            'res': ser.CategoryRetrieveResSerializer,
+            'res': ser.CategorySerializer,
         },
         'update': {
-            'req': ser.CategoryUpdateReqSerializer,
-            'res': ser.CategoryUpdateResSerializer,
+            'req': ser.CategorySerializer,
+            'res': ser.CategorySerializer,
         }
     }
     permission_action_classes = {
