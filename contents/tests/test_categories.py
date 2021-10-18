@@ -73,3 +73,18 @@ class CategoryTestCase(APITestCase):
         self.assertIsNotNone(response.json().get('category'))
         for key, value in data.items():
             self.assertEqual(response.json().get('category').get(key), value)
+
+    def test_partial_update_category(self):
+        token = self.login('testuser', 'testuserpass')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        category = Category.objects.create(
+            name=f'test', title=f'test', description=f'test')
+        url = reverse('category-detail', args={str(category.id)})
+        data = {
+            'title': 'new test',
+        }
+        response = self.client.patch(url, data, format='json')
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.json().get('category'))
+        self.assertEqual(response.json().get(
+            'category').get('title'), data.get('title'))
