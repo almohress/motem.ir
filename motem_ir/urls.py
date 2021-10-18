@@ -1,4 +1,3 @@
-from django.utils.regex_helper import contains
 from .settings import DEBUG
 from django.urls import path, include
 
