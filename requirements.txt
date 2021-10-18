@@ -4,7 +4,7 @@ botocore==1.21.48
 Django==3.2.7
 django-storages==1.11.1
 djangorestframework==3.12.4
-djrest-wrapper==0.2.0
+djrest-wrapper==0.3.0
 drf-writable-nested==0.6.3
 gunicorn==20.1.0
 jmespath==0.10.0
@@ -13,7 +13,7 @@ python-dateutil==2.8.2
 python-magic==0.4.24
 pytz==2021.1
 s3transfer==0.5.0
-sha-accounts==0.2.0
 six==1.16.0
 sqlparse==0.4.2
 urllib3==1.26.7
+djangorestframework-simplejwt==5.0.0
