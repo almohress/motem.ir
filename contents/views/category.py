@@ -10,21 +10,21 @@ class CategoryViewSet(BaseViewSet):
     serializer_action_classes = {
         'create': {
             'req': ser.CategorySerializer,
-            'res': ser.CategorySerializer,
+            'res': ser.CategoryResponseSerializer,
         },
         'list': {
             'res': ser.CategoryListSerializer,
         },
         'retrieve': {
-            'res': ser.CategorySerializer,
+            'res': ser.CategoryResponseSerializer,
         },
         'update': {
             'req': ser.CategorySerializer,
-            'res': ser.CategorySerializer,
+            'res': ser.CategoryResponseSerializer,
         },
         'partial_update': {
             'req': ser.CategorySerializer,
-            'res': ser.CategorySerializer,
+            'res': ser.CategoryResponseSerializer,
         }
     }
     permission_action_classes = {
