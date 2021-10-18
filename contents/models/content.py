@@ -12,3 +12,7 @@ class Content(BaseModel):
     category = models.ForeignKey(
         Category, related_name='catagory', on_delete=models.CASCADE)
     files = models.ManyToManyField(Multimedia)
+
+    class Meta:
+        verbose_name = 'content'
+        verbose_name_plural = 'contents'

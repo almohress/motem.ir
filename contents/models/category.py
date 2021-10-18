@@ -8,3 +8,7 @@ class Category(BaseModel):
     title = models.CharField(max_length=50)
     description = models.TextField()
     files = models.ManyToManyField(Multimedia, blank=True)
+
+    class Meta:
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'

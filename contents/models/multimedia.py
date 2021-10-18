@@ -16,6 +16,11 @@ class Multimedia(BaseModel):
     last_modified = models.DateTimeField(auto_now_add=True)
     is_video = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = 'multimedia'
+        verbose_name_plural = 'multimedia'
+
+
     def save(self, *args, **kwargs):
         mime = magic.Magic(mime=True).from_buffer(
             self.file.file.file.read()).split('/')[0].lower()
