@@ -21,6 +21,10 @@ class CategoryViewSet(BaseViewSet):
         'update': {
             'req': ser.CategorySerializer,
             'res': ser.CategorySerializer,
+        },
+        'partial_update': {
+            'req': ser.CategorySerializer,
+            'res': ser.CategorySerializer,
         }
     }
     permission_action_classes = {
