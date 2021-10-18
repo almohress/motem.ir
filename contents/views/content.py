@@ -1,6 +1,5 @@
 from rest_framework.permissions import IsAdminUser
 from djrest_wrapper.interfaces import BaseViewSet
-from ..services import ContentService
 from .. import serializers as ser
 from ..models import Content
 
