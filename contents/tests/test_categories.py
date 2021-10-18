@@ -1,6 +1,7 @@
 from rest_framework.test import APITestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
+from ..models import Category
 
 
 class CategoryTestCase(APITestCase):
@@ -32,3 +33,14 @@ class CategoryTestCase(APITestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, 201)
         self.assertIsNotNone(response.json().get('category'))
+
+    def test_list_categories(self):
+        for i in range(10):
+            Category.objects.create(
+                name=f'test {i}', title=f'test {i}', description=f'test {i}')
+        token = self.login('testuser', 'testuserpass')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        url = reverse('category-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.json().get('categories'))
