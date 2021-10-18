@@ -135,3 +135,24 @@ class ContentTestCase(APITestCase):
         self.assertIsNotNone(response.json().get('content'))
         self.assertEqual(response.json().get(
             'content').get('title'), data.get('title'))
+
+    def test_filter_by_category_content(self):
+        categories = []
+        for i in range(2):
+            categories.append(Category.objects.create(
+                name=f'test', title=f'test', description=f'test'))
+        for i in range(5):
+            Content.objects.create(
+                title=f'test {i}', body=f'test {i}', category=categories[0])
+        for i in range(3):
+            Content.objects.create(
+                title=f'test {i}', body=f'test {i}', category=categories[1])
+        url = reverse('content-list')
+        data = {
+            'category_id': str(categories[1].id),
+        }
+        response = self.client.get(url, data)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNotNone(response.json().get('contents'))
+        for content in response.json().get('contents'):
+            self.assertEqual(content.get('category'), str(categories[1].id))
