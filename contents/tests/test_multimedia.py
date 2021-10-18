@@ -28,7 +28,7 @@ class MultimediaTestCase(TestCase):
 class MultimediaAPITestCase(APITestCase):
     def setUp(self):
         url = 'https://filesamples.com/samples/image/jpeg/sample_640%C3%97426.jpeg'
-        filename = 'testjpeg.jpeg'
+        filename = 'multimedia/testjpeg.jpeg'
         with requests.get(url=url, stream=True) as r:
             r.raise_for_status()
 
@@ -56,10 +56,10 @@ class MultimediaAPITestCase(APITestCase):
         url = reverse('multimedia-list')
         token = self.login('testuser', 'testuserpass')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
-        with open('testjpeg.jpeg', mode='rb') as handle:
+        with open('multimedia/testjpeg.jpeg', mode='rb') as handle:
             file = File(handle)
             upload = SimpleUploadedFile(
-                'testjpeg.jpeg', file.read(),
+                'multimedia/testjpeg.jpeg', file.read(),
                 content_type='multipart/form-data')
             data = {
                 'file': upload
@@ -67,3 +67,23 @@ class MultimediaAPITestCase(APITestCase):
             response = self.client.post(url, data, format='multipart')
             self.assertEqual(response.status_code, 201)
             self.assertIsNotNone(response.json().get('multimedia'))
+
+    def test_delete_multimedia(self):
+        url = reverse('multimedia-list')
+        token = self.login('testuser', 'testuserpass')
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        with open('multimedia/testjpeg.jpeg', mode='rb') as handle:
+            file = File(handle)
+            upload = SimpleUploadedFile(
+                'multimedia/testjpeg.jpeg', file.read(),
+                content_type='multipart/form-data')
+            data = {
+                'file': upload
+            }
+            response = self.client.post(url, data, format='multipart')
+            self.assertEqual(response.status_code, 201)
+            self.assertIsNotNone(response.json().get('multimedia'))
+        m_id = response.json().get('multimedia').get('id')
+        url = reverse('multimedia-detail', args={m_id})
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 204)
