@@ -5,22 +5,26 @@ from ..models import Content
 
 
 class ContentViewSet(BaseViewSet):
-    queryset=Content.objects.all()
-    page_result_key='contents'
+    queryset = Content.objects.all()
+    page_result_key = 'contents'
     serializer_action_classes = {
         'create': {
-            'req': ser.ContentCreateReqSerilizer,
-            'res': ser.ContentCreateResSerilizer,
+            'req': ser.ContentSerilizer,
+            'res': ser.ContentSerilizer,
         },
         'list': {
-            'res': ser.ContentListResSerilizer,
+            'res': ser.ContentListSerilizer,
         },
         'retrieve': {
-            'res': ser.ContentRetrieveResSerilizer,
+            'res': ser.ContentSerilizer,
         },
         'update': {
-            'req': ser.ContentUpdateReqSerilizer,
-            'res': ser.ContentUpdateResSerilizer,
+            'req': ser.ContentSerilizer,
+            'res': ser.ContentSerilizer,
+        },
+        'partial_update': {
+            'req': ser.ContentSerilizer,
+            'res': ser.ContentSerilizer,
         }
     }
     permission_action_classes = {
