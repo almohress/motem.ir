@@ -12,21 +12,21 @@ class ContentViewSet(BaseViewSet):
     serializer_action_classes = {
         'create': {
             'req': ser.ContentSerializer,
-            'res': ser.ContentSerializer,
+            'res': ser.ContentResponseSerializer,
         },
         'list': {
             'res': ser.ContentListSerializer,
         },
         'retrieve': {
-            'res': ser.ContentSerializer,
+            'res': ser.ContentResponseSerializer,
         },
         'update': {
             'req': ser.ContentSerializer,
-            'res': ser.ContentSerializer,
+            'res': ser.ContentResponseSerializer,
         },
         'partial_update': {
             'req': ser.ContentSerializer,
-            'res': ser.ContentSerializer,
+            'res': ser.ContentResponseSerializer,
         }
     }
     permission_action_classes = {
