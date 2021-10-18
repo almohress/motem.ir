@@ -8,7 +8,7 @@ from ..filters import PublishedFilterBackend, ContentCategoryFilterBackend
 class ContentViewSet(BaseViewSet):
     queryset = Content.objects.all()
     page_result_key = 'contents'
-    filter_backends = [PublishedFilterBackend, ContentCategoryFilterBackend]
+    filter_backends = [ContentCategoryFilterBackend, PublishedFilterBackend]
     serializer_action_classes = {
         'create': {
             'req': ser.ContentSerializer,
