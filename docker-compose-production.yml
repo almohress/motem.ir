@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  api:
+    image: motem_ir:1.0.0
+    command: gunicorn --bind :8000 --workers 3 motem_ir.wsgi:application 
+    env_file:
+      - ./production.env
+
+  web:
+    image: motem_ir-nginx:1.0.0
+    ports:
+      - 80:80
+
+  postgres:
+    image: dockerhub.ir/postgres:13.0
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=motem
+      - POSTGRES_PASSWORD='1)1s9k-0xzzt*9#bl-rnm3z&3q#a@q*lh3(x=j0uqjb5s)+sy)'
+      - POSTGRES_DB=motem
+volumes:
+  postgres_data:
