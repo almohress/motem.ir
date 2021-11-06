@@ -1,6 +1,9 @@
-from .category import urlpatterns as category_urls
-from .multimedia import urlpatterns as multimedia_urls
-from .content import urlpatterns as contents_urls
+from rest_framework.routers import DefaultRouter
+from ..views import MultimediaViewSet, CategoryViewSet, ContentViewSet
 
+router = DefaultRouter()
+router.register(r'multimedia', MultimediaViewSet, basename='multimedia')
+router.register(r'contents', ContentViewSet, basename='content')
+router.register(r'categories', CategoryViewSet, basename='category')
 
-urlpatterns = category_urls+multimedia_urls+contents_urls
+urlpatterns = router.urls
